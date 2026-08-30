@@ -74,6 +74,33 @@ Rank by **blast radius**, not tidiness: money loss, cross-tenant leak, data-loss
 
 Report each finding as: `id · severity · file:line · one-line mechanism · concrete failure scenario · red-prove line · verdict (CONFIRMED / BANKED / DISMISSED)`, plus the angles that came back clean. **A single clean pass is not done** — re-run the sweep after fixing; the bar is **two consecutive passes that surface nothing new**. That is what turns "green" into an *earned* clean rather than a rubber stamp.
 
+## Step 6 — Done means shippable-clean, not just defect-free
+
+Two consecutive clean passes prove the code; they do not prove the *project*.
+"Finished" carries two more obligations, checked as deliberately as any angle:
+
+- **Clean documentation.** The docs a newcomer actually needs exist and are
+  TRUE: what the system is, how to run it, how to deploy it, the invariants
+  it enforces, and the seams it exposes. Docs are claims (see the signature
+  move) — a README that describes a flag that no longer exists, or a setup
+  step that no longer works, is a finding, same as a lying comment. Stale
+  docs get fixed or deleted, never left "to be safe."
+
+- **Cruft cleaned out — from the repo AND off the device.** The build leaves
+  droppings; sweep them before calling it done:
+  - *In the repo:* dead scaffolding, commented-out code, orphaned files,
+    stale TODOs that got done, prompt/handoff files that only mattered
+    mid-build, build artifacts that leaked past .gitignore, branches whose
+    work is merged.
+  - *On the device:* temporary worktrees, scratch databases, throwaway
+    scripts in temp dirs, stale background watchers/sessions the build
+    spawned, downloaded fixtures. If it only existed to get the build done,
+    it goes. Anything kept on purpose gets named in the docs with why.
+
+The review's final report states all three: defects (clean twice), docs
+(accurate and sufficient), cruft (repo and device swept) — and it is not
+"done" until every column says so.
+
 ## When not to reach for this
 
 A one-line change with an obvious blast radius does not need six agents over the whole corpus. This is for surfaces that ship to users, touch money/auth/data, or are about to be called "done." When in doubt on something consumer-facing, run it — the cost of the sweep is an hour; the cost of a green lie is a day and a half.

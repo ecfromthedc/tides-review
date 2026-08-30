@@ -8,7 +8,7 @@ It is built to be as thorough as a heavyweight cloud review, and it earns its "c
 
 ## The idea in one line
 
-Fan out independent adversarial **angles** over the whole corpus in parallel, **re-verify every finding at the source** (roughly half dissolve), **red-prove** the survivors with a compiling mutation that makes a real test fail, and **re-run until two consecutive passes come back clean.**
+Fan out independent adversarial **angles** over the whole corpus in parallel, **re-verify every finding at the source** (roughly half dissolve), **red-prove** the survivors with a compiling mutation that makes a real test fail, and **re-run until two consecutive passes come back clean.** Then earn "finished": documentation that tells the truth, and every piece of build cruft swept out of the repo and off the device.
 
 ## The signature move: the devil is in the words
 
