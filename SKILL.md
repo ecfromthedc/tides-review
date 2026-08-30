@@ -97,9 +97,18 @@ Two consecutive clean passes prove the code; they do not prove the *project*.
     spawned, downloaded fixtures. If it only existed to get the build done,
     it goes. Anything kept on purpose gets named in the docs with why.
 
-The review's final report states all three: defects (clean twice), docs
-(accurate and sufficient), cruft (repo and device swept) — and it is not
-"done" until every column says so.
+- **A mainline that tells the whole story.** Everything "finished" claims
+  to include is ON main — no work stranded on unmerged branches, no open
+  PRs quietly holding pieces the release notes assume, no force-push scars
+  or WIP-noise commits a repo auditor would trip over. Every feature/seat
+  branch is either merged or deliberately closed with its reason recorded;
+  the commit history reads as a legible account of what was built and why.
+  Someone opening the repo cold should see a build that looks finished —
+  because on main, it is.
+
+The review's final report states all four: defects (clean twice), docs
+(accurate and sufficient), cruft (repo and device swept), mainline
+(complete and legible) — and it is not "done" until every column says so.
 
 ## When not to reach for this
 
