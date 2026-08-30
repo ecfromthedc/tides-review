@@ -2,13 +2,13 @@
 
 **A green build is not a clean build.**
 
-Tides Review is a rigorous, multi-angle adversarial code-review methodology — packaged as a [Claude Code](https://claude.com/claude-code) skill. It exists because a codebase can have every test passing and CI green while a day and a half of *live* defects sit underneath: a PII residue a name-list test was structurally blind to, money lost-updates, a migration that breaks the old revision mid-deploy, "fixes" whose own tests can't fail.
+Tides Review is **the closer**: a rigorous, multi-angle adversarial review-and-finish methodology — packaged as a [Claude Code](https://claude.com/claude-code) skill. It exists because a codebase can have every test passing and CI green while a day and a half of *live* defects sit underneath: a PII residue a name-list test was structurally blind to, money lost-updates, a migration that breaks the old revision mid-deploy, "fixes" whose own tests can't fail. And because "no bugs" is not the same as "finished" — the closer also audits the build against what was actually promised, fixes what it confirms, sweeps the cruft, and turns in a report a stakeholder can sign off from cold.
 
 It is built to be as thorough as a heavyweight cloud review, and it earns its "clean" instead of asserting it.
 
 ## The idea in one line
 
-Fan out independent adversarial **angles** over the whole corpus in parallel, **re-verify every finding at the source** (roughly half dissolve), **red-prove** the survivors with a compiling mutation that makes a real test fail, and **re-run until two consecutive passes come back clean.** Then earn "finished": documentation that tells the truth, every piece of build cruft swept out of the repo and off the device, and a mainline that carries the whole build — nothing stranded on branches or open PRs, history legible cold.
+Establish **scope truth** first (the promise list: MET / PARTIAL / MISSING — "no bugs found" in a thing that was never built is the most dangerous report there is). Fan out independent adversarial **angles** over the whole corpus in parallel, **re-verify every finding at the source** (roughly half dissolve), **red-prove** the survivors — and the test suite's own invariant coverage — with compiling mutations that make real tests fail, **fix everything confirmed**, and **re-run until two consecutive passes come back clean.** Then earn "finished": documentation proven by a cold README walk, every piece of build cruft swept out of the repo and off the device, a mainline that carries the whole build with history legible cold, and a closing report that answers every question a stakeholder would ask.
 
 ## The signature move: the devil is in the words
 
