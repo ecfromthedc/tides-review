@@ -70,9 +70,21 @@ A real finding earns a **compiling** mutation that reverts the fix and makes a *
 Rank by **blast radius**, not tidiness: money loss, cross-tenant leak, data-loss / PII residue, publish-to-wrong-audience, silent corruption come first. Triage every survivor into one of three, each recorded with its evidence:
 - **FIX-NOW** — real and reachable. Fix through the normal gate, matching CI *exactly*: **pinned-toolchain** fmt + clippy (a default rustfmt version-skews and reddens CI), the library/migration invariants (e.g. an expand-only migration test), and the **FULL** test suite — clippy-clean is not enough (a change can pass clippy and break a downstream test). Re-run the angle that found it.
 - **BANK** — real but latent / edge / self-healing (a drift a reconcile pass corrects, a 2-source edge). Document it precisely with the settling facts; don't silently drop it and don't ship a half-fix.
-- **DISMISS** — dissolved on the source read. One line with the fact that settles it, for the second-checker.
+- **DISMISS** — dissolved on the source read. One line with the fact that settles it, for the second-checker. **The second check is real, not implied:** a different agent (or a fresh pass) re-reads every DISMISS against its settling fact — the dismisser's own bias is exactly what it exists to catch.
 
 Report each finding as: `id · severity · file:line · one-line mechanism · concrete failure scenario · red-prove line · verdict (CONFIRMED / BANKED / DISMISSED)`, plus the angles that came back clean. **A single clean pass is not done** — re-run the sweep after fixing; the bar is **two consecutive passes that surface nothing new**. That is what turns "green" into an *earned* clean rather than a rubber stamp.
+
+## Standing angles — never optional, whatever else you pick
+
+Four angles have earned a permanent seat because they catch what a green gate is *structurally* blind to:
+
+- **Live-substrate verification.** Runtime-bound SQL, env-driven config, and vendor adapters can be compile-green and wrong. Run the gated live suites against a real scratch substrate (database, queue, filesystem); boot the actual binary and hit its critical endpoints. A test suite that never touches the real substrate cannot vouch for it — the canonical case is a foreign-key violation that no amount of clippy will ever see.
+
+- **Concurrency & idempotency.** Hunt TOCTOU: every cap, uniqueness, or balance rule must be enforced *inside* the transaction that writes, with the row locked — a check outside the lock is a race with a polite error message. Every externally-triggered effect (webhook, payout, queue claim, delivery) must be provably once-only under replay AND under crash-between-two-writes: ask "if the process dies on this exact line, what does the retry do?"
+
+- **Degraded-mode honesty & leak sweep.** Walk every unconfigured/missing-credential path: it must refuse loudly (503, typed error), never simulate success — a stub that fakes the happy path is a defect even with no bug behind it. Then sweep what crosses boundaries: error `Display` impls that quote provider bodies onto the wire, logs that capture bearer capabilities (presigned URLs, session tokens, checkout links), diagnostics that leak schema.
+
+- **Supply chain & secrets.** `cargo audit` (or ecosystem equivalent) clean or consciously waived; RC-grade dependencies pinned exact; the dependency tree diffed against intent (a review that never looks can't catch the accidental 300-crate import); repo and history grepped for credential-shaped strings.
 
 ## Step 6 — Done means shippable-clean, not just defect-free
 
