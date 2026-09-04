@@ -22,7 +22,7 @@ This single lens surfaced the most: a "your account alone" export that read an e
 
 The method, briefly:
 
-1. **Pick the angles** — six by default. A *dimension* set for a whole service (money, auth & cross-tenant, data-integrity & deletion, core output pipeline, consumer UI, infra), or a *lens* set for a single consumer UI (dead controls, async-state truth, wrong-target, race/double-submit, navigation/persistence, input-edges). Plus the devil-in-the-words pass through all of them.
+1. **Pick the angles** — eight by default. A *dimension* set for a whole service (money, auth & cross-tenant, data-integrity & deletion, core output pipeline, consumer UI, infra, day zero & degenerate states, and **existence, authority & correction** — the angle that asks whether a *second* person can use the product at all, on what authority it acts, and whether a correction can even be expressed), or a *lens* set for a single consumer UI (dead controls, async-state truth, wrong-target, race/double-submit, navigation/persistence, input-edges). Plus the devil-in-the-words pass through all of them.
 2. **Cover the whole corpus** — coverage is the multiplier, not the angle count. Chunk the code so every part is seen by every angle.
 3. **Verify at the source** — never relay a raw finding; ~1 in 2 dissolve. Independently second-check what you dismiss — a broken dismissal is a live bug wearing a "safe" label.
 4. **Red-prove** — a compiling mutation that reverts the fix and makes a *behavioral* test fail (`test failed`, not `could not compile`).
