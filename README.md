@@ -51,7 +51,7 @@ and point it at the change, branch, PR, or surface you want audited.
 
 ## When not to reach for it
 
-A one-line change with an obvious blast radius does not need six agents over the whole corpus. Tides Review is for surfaces that ship to users, touch money/auth/data, or are about to be called "done." The cost of the sweep is an hour; the cost of a green lie is a day and a half.
+A one-line change with an obvious blast radius does not need eight agents over the whole corpus. Tides Review is for surfaces that ship to users, touch money/auth/data, or are about to be called "done." The cost of the sweep is an hour; the cost of a green lie is a day and a half.
 
 ## License
 

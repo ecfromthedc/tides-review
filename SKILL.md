@@ -222,4 +222,4 @@ The grade for this document is a single question: **could a stakeholder who watc
 
 ## When not to reach for this
 
-A one-line change with an obvious blast radius does not need six agents over the whole corpus. This is for surfaces that ship to users, touch money/auth/data, or are about to be called "done." When in doubt on something consumer-facing, run it — the cost of the sweep is an hour; the cost of a green lie is a day and a half.
+A one-line change with an obvious blast radius does not need eight agents over the whole corpus. This is for surfaces that ship to users, touch money/auth/data, or are about to be called "done." When in doubt on something consumer-facing, run it — the cost of the sweep is an hour; the cost of a green lie is a day and a half.
