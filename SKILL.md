@@ -220,6 +220,17 @@ A+ work is *turned in*, not just done. The close produces one document of record
 
 The grade for this document is a single question: **could a stakeholder who watched none of the work sign off from this report alone?** If they would have to ask a question first, the report is not finished — and neither is the close.
 
+## Step 8 — The last check is the documentation itself
+
+Before anything is turned in or called done, the close returns to the words one final time: **make sure the documentation is really clean.** Not "written" — *true*.
+
+1. **Re-read every doc the build ships, cold, after the fixes.** Every README, AGENTS/CLAUDE instruction file, closing report, comment header, and UI string written or touched this round is a claim (see the signature move). The final sweep reads them *as a user would*, hunting for prose that references code that no longer exists, counts that have drifted (an angle default, a table count, a "six" that became eight), steps that no longer work, or promises the merged tree quietly under-delivers.
+2. **Walk the docs verbatim, one last time.** Clone-and-run the quickstart exactly as written, deviating for nothing. Every place you had to know something the docs did not say is a defect — fix the doc or fix the code, never leave the gap.
+3. **Check the docs agree with each other.** Two files each telling the truth about one commit can still disagree after a merge (a README lane and a SKILL lane landing the same change at different depths). Cross-read sibling docs for contradicting claims — numbers, defaults, flags, install paths — and reconcile them to the code, not to each other.
+4. **Zero stale references.** Grep the docs for every symbol, flag, filename, URL, and count they name, and confirm each still resolves in the tree. A doc naming a deleted file or a renamed flag is a lie wearing a bookmark. Fix or delete the line — never leave it "to be safe."
+
+A close whose code is clean twice but whose documentation lies is not done. The documentation check is the **last** gate before the report is signed, because every earlier step may have edited the code the docs describe.
+
 ## When not to reach for this
 
 A one-line change with an obvious blast radius does not need eight agents over the whole corpus. This is for surfaces that ship to users, touch money/auth/data, or are about to be called "done." When in doubt on something consumer-facing, run it — the cost of the sweep is an hour; the cost of a green lie is a day and a half.

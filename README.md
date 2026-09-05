@@ -27,6 +27,7 @@ The method, briefly:
 3. **Verify at the source** — never relay a raw finding; ~1 in 2 dissolve. Independently second-check what you dismiss — a broken dismissal is a live bug wearing a "safe" label.
 4. **Red-prove** — a compiling mutation that reverts the fix and makes a *behavioral* test fail (`test failed`, not `could not compile`).
 5. **Triage & re-run** — rank by blast radius; fix / bank / dismiss with evidence; gate the way CI actually gates; the bar is two consecutive clean passes.
+6. **Turn it in clean** — the last gate is the documentation itself: re-read every doc cold after the fixes, walk the quickstart verbatim, cross-check sibling docs for contradicting claims, and grep out every stale reference. A close whose docs lie is not done.
 
 ## Install as a Claude Code skill
 
