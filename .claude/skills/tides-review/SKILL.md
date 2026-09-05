@@ -74,6 +74,8 @@ Rank by **blast radius**, not tidiness: money loss, cross-tenant leak, data-loss
 
 Report each finding as: `id · severity · file:line · one-line mechanism · concrete failure scenario · red-prove line · verdict (CONFIRMED / BANKED / DISMISSED)`, plus the angles that came back clean. **A single clean pass is not done** — re-run the sweep after fixing; the bar is **two consecutive passes that surface nothing new**. That is what turns "green" into an *earned* clean rather than a rubber stamp.
 
+**Each lane gates itself before it lands.** The merged-tree gate stays authoritative — but a lane that never ran its own suite can ship code *contradicting its own pins*, which is worse than an untested fix because the pins exist and are red and nobody looked. (Real case: a rate-limit keying fix landed with the polarity backwards while the lane's own three tests asserted the correct semantics — failing in the lane's worktree, which had never run them.) Before a lane offers itself for merge, it runs its own scoped gate — its crate's tests (asserting the passed-count, not just the exit), fmt, clippy. Per-lane gating is what makes the integrated-tree gate a *check* instead of a *net*.
+
 ## When not to reach for this
 
 A one-line change with an obvious blast radius does not need six agents over the whole corpus. This is for surfaces that ship to users, touch money/auth/data, or are about to be called "done." When in doubt on something consumer-facing, run it — the cost of the sweep is an hour; the cost of a green lie is a day and a half.
